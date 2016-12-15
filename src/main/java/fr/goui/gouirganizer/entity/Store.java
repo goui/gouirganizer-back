@@ -1,10 +1,14 @@
 package fr.goui.gouirganizer.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -22,6 +26,9 @@ public class Store {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "store", targetEntity = Employee.class, cascade = CascadeType.REMOVE)
+    private List<Employee> employees;
 
     public long getId() {
         return id;
@@ -45,6 +52,14 @@ public class Store {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override

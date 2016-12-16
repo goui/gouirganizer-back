@@ -1,10 +1,14 @@
 package fr.goui.gouirganizer.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
@@ -21,6 +25,14 @@ public class Appointment {
     @Column(nullable = false)
     private ZonedDateTime beginDate;
 
+    @OneToOne(fetch = FetchType.LAZY, targetEntity = Act.class, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "ACT_ID")
+    private Act act;
+
+    @OneToOne(fetch = FetchType.LAZY, targetEntity = Client.class, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "CLIENT_ID")
+    private Client client;
+
     public long getId() {
         return id;
     }
@@ -35,6 +47,22 @@ public class Appointment {
 
     public void setBeginDate(ZonedDateTime beginDate) {
         this.beginDate = beginDate;
+    }
+
+    public Act getAct() {
+        return act;
+    }
+
+    public void setAct(Act act) {
+        this.act = act;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     @Override

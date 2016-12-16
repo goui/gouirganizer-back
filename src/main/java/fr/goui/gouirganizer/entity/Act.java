@@ -14,6 +14,7 @@ import java.util.Objects;
 public class Act {
 
     @Id
+    @Column(name = "ACT_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 

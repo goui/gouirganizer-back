@@ -5,26 +5,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
-import java.time.ZonedDateTime;
 
 /**
- * Data transfer object for an Appointment.
+ * Data transfer object for a Client without critical info.
  */
 @EqualsAndHashCode
-public class AppointmentDTO {
+public class ClientInfoDTO {
 
     @Getter
     @Setter
     @NotNull
-    private ZonedDateTime beginDate;
+    private long id;
 
     @Getter
     @Setter
     @NotNull
-    private ActDTO act;
-
-    @Getter
-    @Setter
-    @NotNull
-    private ClientInfoDTO client;
+    private String name;
 }

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -32,6 +33,10 @@ public class Appointment {
     @OneToOne(fetch = FetchType.LAZY, targetEntity = Client.class, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "CLIENT_ID")
     private Client client;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_fk")
+    private Employee employee;
 
     public long getId() {
         return id;
@@ -63,6 +68,14 @@ public class Appointment {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package fr.goui.gouirganizer.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -29,6 +32,9 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_fk")
     private Store store;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", targetEntity = Appointment.class, cascade = CascadeType.REMOVE)
+    private List<Appointment> appointments;
 
     public long getId() {
         return id;
@@ -60,6 +66,14 @@ public class Employee {
 
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
     }
 
     @Override
